@@ -1,12 +1,17 @@
-function App() {
-  return (
-    <div className="w-full h-screen flex justify-center items-center">
-      <h1 className="font-bold text-5xl text-slate-900">
-        <span className="text-pink-900">Welcome to</span>
-        <span>Luxury Car Booking</span>
-      </h1>
-    </div>
-  );
-}
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Layout from './pages/Layout';
+import Home from './pages/Home';
+import Models from './pages/Models';
+
+const App = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/models" element={<Models />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+);
 
 export default App;
