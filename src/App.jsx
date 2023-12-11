@@ -6,9 +6,9 @@ import Models from './pages/Models';
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Layout />}>
-        <Route index element={<Home />} />
-        <Route path="/models" element={<Models />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/models" element={<Layout />}>
+        <Route index element={<Models />} />
       </Route>
     </Routes>
   </BrowserRouter>

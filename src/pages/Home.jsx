@@ -8,7 +8,9 @@ const Home = () => (
         <span className="text-pink-900"> Welcome to </span>
         <span> Luxury Car Booking </span>
       </h1>
-      <Link to="/models">All Models</Link>
+      <Link to="/models" className="btn">
+        All Models
+      </Link>
     </div>
   </div>
 );

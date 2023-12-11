@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.btn {
+  @apply px-3 py-2 bg-green-700 text-white rounded-full;
+}
