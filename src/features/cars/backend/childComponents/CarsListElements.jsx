@@ -5,12 +5,12 @@ import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
 import Badge from 'react-bootstrap/Badge';
-import { reserveCar, cancelCarReservation } from '../carsSlice';
+import { reserveCar, cancelCarReservation } from '../../carsSlice';
 
 function CarsListElements({ cars }) {
   const dispatch = useDispatch();
 
-  if (!cars) {
+  if (!cars || cars.length === 0) {
     return (
       <div>
         Cars not found
@@ -80,6 +80,8 @@ CarsListElements.propTypes = {
       id: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
+      facebook: PropTypes.string,
+      twitter: PropTypes.string,
       website: PropTypes.string,
     }),
   ).isRequired,

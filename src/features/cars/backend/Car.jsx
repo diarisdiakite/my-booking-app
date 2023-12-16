@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useParams, Link } from 'react-router-dom';
-import { selectCarsById, reserveCar, cancelCarReservation } from './carsSlice';
+import { selectCarsById, reserveCar, cancelCarReservation } from '../carsSlice';
 
 function Car() {
   const dispatch = useDispatch();
@@ -12,7 +12,7 @@ function Car() {
     <div className="main-container">
       <div className="car-card">
         <div className="car" key={`car-${carId}`}>
-          <h3>{car?.car_name}</h3>
+          <h3>{car?.name}</h3>
           <p>{car?.description}</p>
           <p><Link to={car?.website}>{car?.website}</Link></p>
           <button

@@ -4,9 +4,9 @@ import {
 import Layout from './pages/Layout';
 import Home from './pages/Home';
 import Models from './pages/Models';
-import NavBar from './components/NavBar';
-import Car from './features/cars/Car';
-import CarsList from './features/cars/CarsList';
+import NavBar from './components/backend/NavBar';
+import Car from './features/cars/backend/Car';
+import CarsList from './features/cars/backend/CarsList';
 import NotFoundPage from './components/NotFoundPage';
 // import UsersList from './features/users/UsersList';
 // import User from './features/users/User';

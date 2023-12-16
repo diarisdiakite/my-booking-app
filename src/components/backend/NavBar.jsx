@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import logo from '../assets/img/2024-aston-martin-db12-125-64933aa0a739d.jpg';
-// import '../assets/css/navbar.css';
+import logo from '../../assets/img/2024-aston-martin-db12-125-64933aa0a739d.jpg';
+import '../../assets/css/navbar.css';
 
 const NavBar = () => (
   <div className="container">
@@ -11,6 +11,7 @@ const NavBar = () => (
     </div>
     <nav className="nav-container">
       <NavLink to="/cars" className="nav-item">Cars</NavLink>
+      <NavLink to="/cars" className="nav-item">Reservations</NavLink>
     </nav>
   </div>
 );
