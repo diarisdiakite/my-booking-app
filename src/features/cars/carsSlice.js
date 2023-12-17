@@ -1,69 +1,18 @@
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
-import fetchCarsAPI from './fetchCarsAPI';
+import { fetchCarsAPI, fetchCarByIdAPI } from './fetchCarsAPI';
 
 const initialState = {
   loading: false,
-  cars: [
-    {
-      id: '1',
-      name: 'BENTLEY FLYING SPUR',
-      image: 'imageLink',
-      model: 'BENTLEY FLYING SPUR',
-      year: 2024,
-      description: 'Get an ultra-luxurious experience with our new Bentley Fmying Spur2024',
-      category: 'Sport',
-      website: 'website-link',
-      reserved: false,
-    },
-    {
-      id: '2',
-      name: 'BENTLEY CONTINENTAL GT',
-      image: 'imageLink',
-      model: 'BENTLEY CONTINENTAL GT',
-      year: 2024,
-      description: 'Get an ultra-luxurious experience with our new Bentley Continental 2024',
-      category: 'Sport',
-      website: 'website-link',
-      reserved: false,
-    },
-    {
-      id: '3',
-      name: 'ROLLS-ROYCE PHANTOM',
-      image: 'imageLink',
-      model: 'ROLLS-ROYCE PHANTOM',
-      year: 2024,
-      description: 'Get an ultra-luxurious experience with our new Rolls-Royce Phantom 2024',
-      category: 'Sport',
-      website: 'website-link',
-      reserved: false,
-    },
-    {
-      id: '4',
-      name: 'ASTON MARTIN DB12',
-      image: 'imageLink',
-      model: 'ASTON MARTIN DB12',
-      year: 2024,
-      description: 'Get an ultra-luxurious experience with our new Aston Martin DB12 2024',
-      category: 'Sport',
-      website: 'website-link',
-      reserved: false,
-    },
-    {
-      id: '5',
-      name: 'MERCEDES-MAYBACH S-CLASS',
-      image: 'imageLink',
-      model: 'MERCEDES-MAYBACH S-CLASS',
-      year: 2024,
-      description: 'Get an ultra-luxurious experience with our new Mercedes Maybach S-Class 2024',
-      category: 'Sport',
-      website: 'website-link',
-      reserved: false,
-    },
-  ],
+  cars: [],
   error: '',
 };
 
 export const fetchCars = createAsyncThunk('cars/fetchCars', async () => fetchCarsAPI());
+
+export const fetchCarById = createAsyncThunk('cars/fetchCarById', async (carId) => {
+  const car = await fetchCarByIdAPI(carId);
+  return car;
+});
 
 const carsSlice = createSlice({
   name: 'cars',
@@ -74,6 +23,7 @@ const carsSlice = createSlice({
       const selectedCars = state.cars.map((car) => ({
         id: car.id,
         name: car.name,
+        image: car.image,
         desription: car.description,
         reserved: false,
       }));
@@ -110,6 +60,11 @@ const carsSlice = createSlice({
       state.cars = [];
       state.error = action.error ? action.error.message : 'Unknown error occured';
     });
+    builder.addCase(fetchCarById.fulfilled, (state, action) => {
+      state.loading = false;
+      state.cars = [action.payload];
+      state.error = '';
+    });
   },
 });
 
@@ -120,9 +75,12 @@ export const selectAllReservedCars = (state) => state.cars.cars.filter(
   (car) => car.reserved === true,
 );
 
-export const selectCarsById = (state, carId) => state.cars.cars.find(
-  (car) => car.id === carId,
-);
+export const selectCarsById = (state, carId) => {
+  const foundCar = state.cars.cars.find((car) => car.id === carId);
+  return foundCar || null; // Return null or a default value if the car is not found
+};
+
+/* export const selectCarsById = (state, carId) => state.cars.entities[carId]; */
 
 export const selectCarsByUser = createSelector(
   [selectAllCars, (_, userId) => userId],

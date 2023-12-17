@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
 import Badge from 'react-bootstrap/Badge';
-import { reserveCar, cancelCarReservation } from '../../carsSlice';
+import { reserveCar } from '../../carsSlice';
 
 function CarsListElements({ cars }) {
   const dispatch = useDispatch();
@@ -46,26 +46,14 @@ function CarsListElements({ cars }) {
               )}
             </td>
             <td className="fixed-width">
-              {!car.reserved && (
               <Button
                 type="button"
                 variant="outline-secondary"
                 aria-label="Join car"
                 onClick={() => dispatch(reserveCar(car.id))}
               >
-                Reserve Car
+                Delete Car
               </Button>
-              )}
-              {car.reserved && (
-              <Button
-                type="button"
-                variant="outline-danger"
-                aria-label="cancel car reservation"
-                onClick={() => dispatch(cancelCarReservation(car.id))}
-              >
-                Cancel Reservation
-              </Button>
-              )}
             </td>
           </tr>
         ))}

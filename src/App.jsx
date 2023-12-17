@@ -2,21 +2,20 @@ import {
   BrowserRouter, Routes, Route,
 } from 'react-router-dom';
 import Layout from './pages/Layout';
-import Home from './pages/Home';
 import Models from './pages/Models';
-import NavBar from './components/backend/NavBar';
-import Car from './features/cars/backend/Car';
+import CarsListHome from './features/cars/CarsList';
+import Car from './features/cars/Car';
 import CarsList from './features/cars/backend/CarsList';
 import NotFoundPage from './components/NotFoundPage';
+import AddNewCarForm from './features/cars/backend/forms/AddNewCar';
 // import UsersList from './features/users/UsersList';
 // import User from './features/users/User';
 
 function App() {
   return (
     <BrowserRouter>
-      <NavBar />
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/" element={<CarsListHome />} />
         <Route path="/models" element={<Layout />}>
           <Route index element={<Models />} />
         </Route>
@@ -24,6 +23,8 @@ function App() {
         <Route path="/cars">
           <Route index element={<CarsList />} />
           <Route path=":carId" element={<Car />} />
+          <Route path="new" element={<AddNewCarForm />} />
+          <Route path="delete" element={<CarsList />} />
         </Route>
         {/* <Route path="/users">
           <Route index element={<UsersList />} />

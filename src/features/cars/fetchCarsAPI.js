@@ -18,4 +18,21 @@ const fetchCarsAPI = async () => {
   }
 };
 
-export default fetchCarsAPI;
+const fetchCarByIdAPI = async (carId) => {
+  const url = `${FEATURE_URL}/${carId}`;
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch car by ID');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(`Failed to fetch car by ID: ${error.message}`);
+  }
+};
+
+export { fetchCarsAPI, fetchCarByIdAPI };

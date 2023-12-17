@@ -9,7 +9,7 @@ function CarsList() {
   const cars = useSelector(selectAllCars);
 
   return (
-    <div className="container">
+    <div className="home-main-container">
       <CarsListElements
         cars={cars}
       />
