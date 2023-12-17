@@ -7,6 +7,7 @@ import '../../assets/css/item.css';
 
 function CarsListHome() {
   const cars = useSelector(selectAllCars);
+
   const dispatch = useDispatch();
 
   const handleCarClick = (carId) => {
@@ -21,7 +22,7 @@ function CarsListHome() {
         <div className="grid grid-cols-3 gap-4">
           {cars.map((car) => (
             <div key={car.id} className="item-card">
-              <div key={`frontend-car-${car.id}-${car.name}`} className="item-card-img">
+              <div key={`frontend-car-${car.id}`} className="item-card-img">
                 <img src={`${process.env.PUBLIC_URL}/${car.image}`} alt={car.name} />
               </div>
               <div className="item-card-text-no-line-height">
@@ -30,25 +31,28 @@ function CarsListHome() {
                   <button
                     type="button"
                     className="no-style"
-                    onClick={() => handleCarClick(car.id)}
+                    onClick={() => {
+                      console.log('Car ID:', car.id);
+                      handleCarClick(car.id);
+                    }}
                   >
                     <h4>
                       <Link className="no-style" to={`/cars/${car.id}`}>
-                        {car.name}
+                        {car?.name}
                       </Link>
                     </h4>
                   </button>
-                  <p>{car.description}</p>
+                  <p>{car?.description}</p>
                   <div>
                     <p className="bolded">
                       {' Facebook: '}
-                      {car.facebook}
+                      {car?.facebook}
                       ,
                       {' Twitter: '}
-                      {car.twitter}
+                      {car?.twitter}
                       ,
                       {' Website: '}
-                      {car.website}
+                      {car?.website}
                     </p>
                   </div>
                 </div>

@@ -12,6 +12,8 @@ function Car() {
     return <div>Loading...</div>;
   }
 
+  // const { name, description, model, website } = car || {};
+
   return (
     <div className="main-container">
       <div className="car-card">
@@ -19,7 +21,11 @@ function Car() {
           <h3>{car?.name}</h3>
           <p>{car?.description}</p>
           <p>{car?.model}</p>
-          <p><Link to={car?.website}>{car?.website}</Link></p>
+          <p>
+            <Link to={car?.website} target="_blank" rel="noopener noreferrer">
+              {car?.website}
+            </Link>
+          </p>
           <button
             type="button"
             aria-label="Update car"

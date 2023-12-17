@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
 import { Button } from 'react-bootstrap';
-import Badge from 'react-bootstrap/Badge';
 import { reserveCar } from '../../carsSlice';
 
 function CarsListElements({ cars }) {
@@ -23,8 +22,8 @@ function CarsListElements({ cars }) {
       <thead>
         <tr>
           <th>Car</th>
+          <th>Category</th>
           <th>Description</th>
-          <th>Status</th>
           <th>Action</th>
         </tr>
       </thead>
@@ -32,19 +31,8 @@ function CarsListElements({ cars }) {
         {cars.map((car) => (
           <tr key={car.id}>
             <td><Link to={`/cars/${car.id}`} className="no-style bolded">{car.name}</Link></td>
+            <td>{car.category}</td>
             <td>{car.description}</td>
-            <td className="fixed-width">
-              {!car.reserved && (
-              <Badge bg="secondary">
-                Not Reserved
-              </Badge>
-              )}
-              {car.reserved && (
-              <Badge bg="success">
-                Reserved Car
-              </Badge>
-              )}
-            </td>
             <td className="fixed-width">
               <Button
                 type="button"

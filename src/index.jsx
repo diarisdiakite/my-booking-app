@@ -5,13 +5,15 @@ import store from './features/store';
 import './index.css';
 import App from './App';
 import {
-  fetchCars, setFetchedCars, fetchCarById,
+  fetchCars, setFetchedCars,
 } from './features/cars/carsSlice';
 import 'bootstrap/dist/css/bootstrap.css';
 
+// const { carId } = useParams();
+
 store.dispatch(fetchCars());
 store.dispatch(setFetchedCars());
-store.dispatch(fetchCarById());
+// store.dispatch(fetchCarById());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
