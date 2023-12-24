@@ -11,9 +11,9 @@ const SideNavbar = () => (
           <Logo />
         </Link>
         <div>
-          <NavLink to="/dashboard/models" className="block p-3 uppercase">Models</NavLink>
-          <NavLink to="/dashboard/reservation" className="block p-3 uppercase">Reservation</NavLink>
-          <NavLink to="/dashboard/reservation-form" className="block p-3 uppercase">Reservation Form</NavLink>
+          <NavLink to="/dashboard/models" className="block p-3 uppercase font-bold">Models</NavLink>
+          <NavLink to="/dashboard/reservation" className="block p-3 uppercase font-bold">My Reservations</NavLink>
+          <NavLink to="/dashboard/reservation-form" className="block p-3 uppercase font-bold">Reservation Form</NavLink>
         </div>
       </div>
       <div className="flex flex-col items-center text-center">

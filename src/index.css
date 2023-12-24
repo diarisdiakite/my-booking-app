@@ -13,3 +13,11 @@
 .nav-link {
   @apply uppercase;
 }
+
+.page-title {
+  @apply uppercase font-bold text-2xl;
+}
+
+.page-title__subtitle {
+  @apply text-slate-500;
+}
