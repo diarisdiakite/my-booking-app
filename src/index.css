@@ -3,11 +3,11 @@
 @tailwind utilities;
 
 .btn {
-  @apply px-3 py-2 bg-green-700 text-white rounded-full;
+  @apply px-3 py-2 bg-primary text-white rounded-full;
 }
 
 .active {
-  @apply bg-green-700 text-white;
+  @apply bg-primary text-white;
 }
 
 .nav-link {

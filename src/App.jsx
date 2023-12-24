@@ -1,7 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
   Booking,
-  Dashboard,
+  DashboardLayout,
   Home,
   Layout,
   Lifestyle,
@@ -14,7 +14,7 @@ const App = () => (
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />}>
+        <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index path="/dashboard/models" element={<Models />} />
           <Route path="/dashboard/lifestyle" element={<Lifestyle />} />
           <Route path="/dashboard/booking" element={<Booking />} />
