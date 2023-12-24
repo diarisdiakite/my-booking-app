@@ -1,40 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import CarItem from './CarItem';
-
-const cars = [
-  {
-    id: 1,
-    model: 'Mercedes-Maybach S-Class',
-    price: 400,
-    image:
-      'https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/Maybach-S-Class/10866/1690453886358/front-left-side-47.jpg',
-    description:
-      'Mercedes-Benz Maybach S-Class has 2 Petrol Engine on offer. A 4 seater 12 cylinder car.',
-  },
-  {
-    id: 2,
-    model: 'Mercedes-Maybach S-Class',
-    price: 400,
-    image:
-      'https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/Maybach-S-Class/10866/1690453886358/front-left-side-47.jpg',
-    description:
-      'Mercedes-Benz Maybach S-Class has 2 Petrol Engine on offer. A 4 seater 12 cylinder car.',
-  },
-  {
-    id: 3,
-    model: 'Mercedes-Maybach S-Class',
-    price: 400,
-    image:
-      'https://stimg.cardekho.com/images/carexteriorimages/930x620/Mercedes-Benz/Maybach-S-Class/10866/1690453886358/front-left-side-47.jpg',
-    description:
-      'Mercedes-Benz Maybach S-Class has 2 Petrol Engine on offer. A 4 seater 12 cylinder car.',
-  },
-];
+import cars from '../../data';
 
 const CarsList = () => (
-  <ul className="grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+  <ul className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
     {cars.map((car) => (
-      <CarItem key={car.id} car={car} />
+      <li key={car.id}>
+        <Link to={`/dashboard/cars/${car.id}`}>
+          <CarItem car={car} />
+        </Link>
+      </li>
     ))}
   </ul>
 );

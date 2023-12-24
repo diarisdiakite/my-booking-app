@@ -22,7 +22,7 @@ const Home = () => (
         <h1 className="font-bold text-5xl md:text-7xl text-white leading-normal">
           Luxury Car Booking
         </h1>
-        <Link to="/dashboard/models" className="btn mt-4">
+        <Link to="/dashboard/cars" className="btn mt-4">
           <div className="flex items-center gap-2 p-2">
             <Settings className="w-5 h-5" />
             <span>All Models</span>
