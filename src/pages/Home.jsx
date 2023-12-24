@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import homeImageBg from '../assets/images/bg.jpg';
 
 const Home = () => (
-  <div className="relative w-full h-screen bg-orange-500/80">
+  <div className="relative w-full h-screen bg-orange-500/80 px-6">
     <img className="w-fit opacity-10 top-0 bottom-0 left-0 right-0 absolute z-4" src={homeImageBg} alt="home background" />
     <div className="absolute top-0 left-0 right-0">
       <div className="flex justify-between p-6">
@@ -18,8 +18,8 @@ const Home = () => (
       </div>
     </div>
     <div className="relative z-999">
-      <div className="w-full h-screen flex flex-col justify-center items-center -mt-6">
-        <h1 className="font-bold text-7xl text-white">
+      <div className="w-full h-screen flex flex-col gap-4 justify-center items-center -mt-6 text-center">
+        <h1 className="font-bold text-5xl md:text-7xl text-white leading-normal">
           Luxury Car Booking
         </h1>
         <Link to="/dashboard/models" className="btn mt-4">
