@@ -1,12 +1,11 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import {
-  Booking,
+  Reservation,
   DashboardLayout,
   Home,
   Layout,
-  Lifestyle,
   Models,
-  TestDrive,
+  ReservationForm,
 } from './pages';
 
 const App = () => (
@@ -16,9 +15,8 @@ const App = () => (
         <Route index element={<Home />} />
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index path="/dashboard/models" element={<Models />} />
-          <Route path="/dashboard/lifestyle" element={<Lifestyle />} />
-          <Route path="/dashboard/booking" element={<Booking />} />
-          <Route path="/dashboard/test-drive" element={<TestDrive />} />
+          <Route path="/dashboard/reservation" element={<Reservation />} />
+          <Route path="/dashboard/reservation-form" element={<ReservationForm />} />
         </Route>
       </Route>
     </Routes>
