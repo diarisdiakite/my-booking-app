@@ -7,13 +7,13 @@ const Home = () => (
   <div className="relative w-full h-screen bg-orange-500/80 px-6">
     <img className="w-fit opacity-10 top-0 bottom-0 left-0 right-0 absolute z-4" src={homeImageBg} alt="home background" />
     <div className="absolute top-0 left-0 right-0">
-      <div className="flex justify-between p-6">
+      <div className="flex justify-between items-center p-6">
         <div className="flex flex-col gap-2">
           <div className="w-8 h-2 rounded-full bg-white" />
           <div className="w-8 h-2 rounded-full bg-white" />
         </div>
         <div className="bg-white rounded-full py-2 px-4 text-orange-500">
-          <Search />
+          <Search className="w-5 h-5" />
         </div>
       </div>
     </div>
