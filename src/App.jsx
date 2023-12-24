@@ -1,14 +1,25 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Layout from './pages/Layout';
-import Home from './pages/Home';
-import Models from './pages/Models';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import {
+  Booking,
+  Dashboard,
+  Home,
+  Layout,
+  Lifestyle,
+  Models,
+  TestDrive,
+} from './pages';
 
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/models" element={<Layout />}>
-        <Route index element={<Models />} />
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="/dashboard" element={<Dashboard />}>
+          <Route index path="/dashboard/models" element={<Models />} />
+          <Route path="/dashboard/lifestyle" element={<Lifestyle />} />
+          <Route path="/dashboard/booking" element={<Booking />} />
+          <Route path="/dashboard/test-drive" element={<TestDrive />} />
+        </Route>
       </Route>
     </Routes>
   </BrowserRouter>

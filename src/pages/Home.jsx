@@ -8,7 +8,7 @@ const Home = () => (
         <span className="text-pink-900"> Welcome to </span>
         <span> Luxury Car Booking </span>
       </h1>
-      <Link to="/models" className="btn">
+      <Link to="/dashboard/models" className="btn">
         All Models
       </Link>
     </div>
