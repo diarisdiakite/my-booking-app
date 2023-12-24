@@ -12,9 +12,8 @@ const SideNavbar = () => (
         </Link>
         <div>
           <NavLink to="/dashboard/models" className="block p-3 uppercase">Models</NavLink>
-          <NavLink to="/dashboard/lifestyle" className="block p-3 uppercase">Lifestyle</NavLink>
-          <NavLink to="/dashboard/booking" className="block p-3 uppercase">Booking</NavLink>
-          <NavLink to="/dashboard/test-drive" className="block p-3 uppercase">Test Drive</NavLink>
+          <NavLink to="/dashboard/reservation" className="block p-3 uppercase">Reservation</NavLink>
+          <NavLink to="/dashboard/reservation-form" className="block p-3 uppercase">Reservation Form</NavLink>
         </div>
       </div>
       <div className="flex flex-col items-center text-center">
