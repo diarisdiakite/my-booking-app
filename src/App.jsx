@@ -8,6 +8,7 @@ import Car from './features/cars/Car';
 import CarsList from './features/cars/backend/CarsList';
 import NotFoundPage from './components/NotFoundPage';
 import AddNewCarForm from './features/cars/backend/forms/AddNewCar';
+import UpdateCarForm from './features/cars/backend/forms/UpdateCar';
 // import UsersList from './features/users/UsersList';
 // import User from './features/users/User';
 
@@ -24,6 +25,10 @@ function App() {
           <Route index element={<CarsList />} />
           <Route path=":carId" element={<Car />} />
           <Route path="new" element={<AddNewCarForm />} />
+          <Route
+            path=":carId/update"
+            element={<UpdateCarForm />}
+          />
           <Route path="delete" element={<CarsList />} />
         </Route>
         {/* <Route path="/users">

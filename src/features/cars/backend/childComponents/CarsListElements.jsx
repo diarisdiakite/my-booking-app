@@ -2,8 +2,7 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import Table from 'react-bootstrap/Table';
-import { Button } from 'react-bootstrap';
+import { Button, Table } from 'react-bootstrap';
 import { reserveCar } from '../../carsSlice';
 
 function CarsListElements({ cars }) {

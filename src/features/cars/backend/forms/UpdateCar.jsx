@@ -1,26 +1,28 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router';
 // import { createCarAPI } from '../../fetchCarsAPI';
 import SideNavbar from '../../../../components/SideNavbar';
-import { addNewCar } from '../../carsSlice';
+import { updateCar } from '../../carsSlice';
 
-function AddNewCarForm() {
+function UpdateCarForm() {
   const dispatch = useDispatch();
+  const { car } = useParams();
 
-  const [carData, setCarData] = useState({
-    name: '',
-    image: '',
-    model: '',
-    year: '',
-    description: '',
-    facebook: '',
-    twitter: '',
-    website: '',
+  const [updateCarData, setUpdateCarData] = useState({
+    name: car.name || '',
+    image: car.image || '',
+    model: car.model || '',
+    year: car.year || '',
+    description: car.description || '',
+    facebook: car.facebook || '',
+    twitter: car.twitter || '',
+    website: car.website || '',
   });
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setCarData((prevData) => ({
+    setUpdateCarData((prevData) => ({
       ...prevData,
       [id]: value,
     }));
@@ -28,10 +30,10 @@ function AddNewCarForm() {
 
   const handleSubmit = async () => {
     try {
-      await dispatch(addNewCar(carData));
+      await dispatch(updateCar(updateCarData));
 
       // Clear the form after successfull submission
-      setCarData({
+      setUpdateCarData({
         name: '',
         image: '',
         model: '',
@@ -60,7 +62,7 @@ function AddNewCarForm() {
                 type="text"
                 placeholder="Add the car name"
                 id="name"
-                value={carData.name}
+                value={updateCarData.name}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -74,7 +76,7 @@ function AddNewCarForm() {
                 type="text"
                 placeholder="Add the car image"
                 id="image"
-                value={carData.image}
+                value={updateCarData.image}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -88,7 +90,7 @@ function AddNewCarForm() {
                 type="text"
                 placeholder="Add the car image"
                 id="model"
-                value={carData.model}
+                value={updateCarData.model}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -102,7 +104,7 @@ function AddNewCarForm() {
                 type="number"
                 placeholder="Add the car year"
                 id="year"
-                value={carData.year}
+                value={updateCarData.year}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -116,7 +118,7 @@ function AddNewCarForm() {
                 type="text"
                 placeholder="Add the car description"
                 id="description"
-                value={carData.description}
+                value={updateCarData.description}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -130,7 +132,7 @@ function AddNewCarForm() {
                 type="text"
                 placeholder="Add the car facebook"
                 id="facebook"
-                value={carData.facebook}
+                value={updateCarData.facebook}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -144,7 +146,7 @@ function AddNewCarForm() {
                 type="text"
                 placeholder="Add the car twitter"
                 id="twitter"
-                value={carData.twitter}
+                value={updateCarData.twitter}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -158,7 +160,7 @@ function AddNewCarForm() {
                 type="text"
                 placeholder="Add the car website"
                 id="website"
-                value={carData.website}
+                value={updateCarData.website}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -180,4 +182,4 @@ function AddNewCarForm() {
   );
 }
 
-export default AddNewCarForm;
+export default UpdateCarForm;

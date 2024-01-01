@@ -1,17 +1,27 @@
 import { createSlice, createSelector, createAsyncThunk } from '@reduxjs/toolkit';
-import { fetchCarsAPI, fetchCarByIdAPI } from './fetchCarsAPI';
+import {
+  fetchCarsAPI, fetchCarByIdAPI, createCarAPI, updateCarAPI,
+} from './fetchCarsAPI';
 
 const initialState = {
   loading: false,
   cars: [],
+  carById: {},
   error: '',
 };
 
 export const fetchCars = createAsyncThunk('cars/fetchCars', async () => fetchCarsAPI());
 
-export const fetchCarById = createAsyncThunk('cars/fetchCarById', async (carId) => {
-  const car = await fetchCarByIdAPI(carId);
-  return car;
+export const fetchCarById = createAsyncThunk('cars/fetchCarById', async (carId) => fetchCarByIdAPI(carId));
+
+export const addNewCar = createAsyncThunk('cars/addNewCar', async (carData) => {
+  const response = await createCarAPI(carData);
+  return response;
+});
+
+export const updateCar = createAsyncThunk('cars/updateCar', async (carData) => {
+  const response = await updateCarAPI(carData);
+  return response;
 });
 
 const carsSlice = createSlice({
@@ -60,10 +70,50 @@ const carsSlice = createSlice({
       state.cars = [];
       state.error = action.error ? action.error.message : 'Unknown error occured';
     });
+    builder.addCase(fetchCarById.pending, (state) => {
+      state.loading = true;
+    });
     builder.addCase(fetchCarById.fulfilled, (state, action) => {
       state.loading = false;
-      state.cars = [action.payload];
+      state.carById = action.payload;
       state.error = '';
+    });
+    builder.addCase(fetchCarById.rejected, (state, action) => {
+      state.loading = false;
+      state.carById = {};
+      state.error = action.error ? action.error.message : 'Unknown error occured';
+    });
+    // Add a New Car
+    builder.addCase(addNewCar.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(addNewCar.fulfilled, (state, action) => {
+      console.log('Fulfilled Action:', action);
+      state.loading = false;
+      // state.cars = state.cars.concat(action.payload);
+      state.cars = [...state.cars, action.payload];
+      state.error = '';
+    });
+    builder.addCase(addNewCar.rejected, (state, action) => {
+      console.error('Add New Car Rejected:', action.error);
+      state.loading = false;
+      state.error = action.error ? action.error.message : 'Unknown error occured';
+    });
+    // Update Car
+    builder.addCase(updateCar.pending, (state) => {
+      state.loading = true;
+    });
+    builder.addCase(updateCar.fulfilled, (state, action) => {
+      state.loading = false;
+      state.cars = state.cars.map((car) => (
+        car.id === action.payload.id ? action.payload : car
+      ));
+      state.error = '';
+    });
+    builder.addCase(updateCar.rejected, (state, action) => {
+      console.error('Update Car Rejected:', action.error);
+      state.loading = false;
+      state.error = action.error ? action.error.message : 'Unknown error occured';
     });
   },
 });
@@ -77,7 +127,7 @@ export const selectAllReservedCars = (state) => state.cars.cars.filter(
 
 export const selectCarsById = (state, carId) => {
   const foundCar = state.cars.cars.find((car) => car.id === carId);
-  return foundCar || null; // Return null or a default value if the car is not found
+  return foundCar || state.cars.carById || null;
 };
 
 /* export const selectCarsById = (state, carId) => state.cars.entities[carId]; */
