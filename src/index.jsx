@@ -7,13 +7,15 @@ import App from './App';
 import {
   fetchCars, setFetchedCars,
 } from './features/cars/carsSlice';
+import {
+  fetchReservations, setFetchedReservations,
+} from './features/reservations/reservationsSlice';
 import 'bootstrap/dist/css/bootstrap.css';
-
-// const { carId } = useParams();
 
 store.dispatch(fetchCars());
 store.dispatch(setFetchedCars());
-// store.dispatch(fetchCarById());
+store.dispatch(fetchReservations());
+store.dispatch(setFetchedReservations());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

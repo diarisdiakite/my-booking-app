@@ -9,6 +9,9 @@ import CarsList from './features/cars/backend/CarsList';
 import NotFoundPage from './components/NotFoundPage';
 import AddNewCarForm from './features/cars/backend/forms/AddNewCar';
 import UpdateCarForm from './features/cars/backend/forms/UpdateCar';
+import ReservationsListHome from './features/reservations/ReservationsList';
+import Reservation from './features/reservations/Reservation';
+import AddNewReservationForm from './features/reservations/backend/forms/AddNewReservation';
 // import UsersList from './features/users/UsersList';
 // import User from './features/users/User';
 
@@ -23,13 +26,21 @@ function App() {
         {' '}
         <Route path="/cars">
           <Route index element={<CarsList />} />
-          <Route path=":carId" element={<Car />} />
           <Route path="new" element={<AddNewCarForm />} />
-          <Route
-            path=":carId/update"
-            element={<UpdateCarForm />}
-          />
           <Route path="delete" element={<CarsList />} />
+          <Route path=":carId" element={<Car />}>
+            <Route index element={<Car />} />
+            <Route path="update" element={<UpdateCarForm />} />
+          </Route>
+        </Route>
+        <Route path="/reservations">
+          <Route index element={<ReservationsListHome />} />
+          <Route path="new" element={<AddNewReservationForm />} />
+          {/* <Route path="delete" element={<ReservationsList />} /> */}
+          <Route path=":reservationId" element={<Reservation />}>
+            <Route index element={<Reservation />} />
+            {/* <Route path="update" element={<UpdateReservationForm />} /> */}
+          </Route>
         </Route>
         {/* <Route path="/users">
           <Route index element={<UsersList />} />
