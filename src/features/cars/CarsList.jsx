@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAllCars, fetchCarById } from './carsSlice';
@@ -9,10 +9,10 @@ function CarsListHome() {
   const cars = useSelector(selectAllCars);
 
   const dispatch = useDispatch();
-
-  const handleCarClick = (carId) => {
+  
+  useEffect(()=>{
     dispatch(fetchCarById(carId));
-  };
+  }, [])
 
   return (
     <div className="flex">
