@@ -12,7 +12,8 @@ const SideNavbar = () => (
         </Link>
         <div>
           <NavLink to="/dashboard/cars" className="block p-3 uppercase font-bold">Cars</NavLink>
-          <NavLink to="/dashboard/reservation" className="block p-3 uppercase font-bold">My Reservations</NavLink>
+          <NavLink to="/dashboard/new-car-form" className="block p-3 uppercase font-bold">New Car</NavLink>
+          <NavLink to="/dashboard/reservations" className="block p-3 uppercase font-bold">My Reservations</NavLink>
           <NavLink to="/dashboard/reservation-form" className="block p-3 uppercase font-bold">Reservation Form</NavLink>
         </div>
       </div>

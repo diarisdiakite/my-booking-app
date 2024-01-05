@@ -1,13 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { CarDetails, NewCarForm, ReservationForm } from './components';
 import {
-  Reservation,
+  Cars,
   DashboardLayout,
   Home,
   Layout,
-  Cars,
-  ReservationForm,
+  Reservations,
 } from './pages';
-import { CarDetails } from './components';
 
 const App = () => (
   <BrowserRouter>
@@ -17,8 +16,9 @@ const App = () => (
         <Route path="/dashboard" element={<DashboardLayout />}>
           <Route index path="/dashboard/cars" element={<Cars />} />
           <Route path="/dashboard/cars/:id" element={<CarDetails />} />
-          <Route path="/dashboard/reservation" element={<Reservation />} />
+          <Route path="/dashboard/reservations" element={<Reservations />} />
           <Route path="/dashboard/reservation-form" element={<ReservationForm />} />
+          <Route path="/dashboard/new-car-form" element={<NewCarForm />} />
         </Route>
       </Route>
     </Routes>
