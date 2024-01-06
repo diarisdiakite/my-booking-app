@@ -1,17 +1,17 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Table } from 'react-bootstrap';
-import { reserveCar } from '../../carsSlice';
+// import { reserveReservation } from '../../reservationsSlice';
 
-function CarsListElements({ cars }) {
-  const dispatch = useDispatch();
+function ReservationsListElements({ reservations }) {
+  // const dispatch = useDispatch();
 
-  if (!cars || cars.length === 0) {
+  if (!reservations || reservations.length === 0) {
     return (
       <div>
-        Cars not found
+        Reservations not found
       </div>
     );
   }
@@ -20,26 +20,26 @@ function CarsListElements({ cars }) {
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>Car</th>
+          <th>Reservation</th>
           <th>Category</th>
           <th>Description</th>
           <th>Action</th>
         </tr>
       </thead>
       <tbody>
-        {cars.map((car) => (
-          <tr key={car.id}>
-            <td><Link to={`/cars/${car.id}`} className="no-style bolded">{car.name}</Link></td>
-            <td>{car.category}</td>
-            <td>{car.description}</td>
+        {reservations.map((reservation) => (
+          <tr key={reservation.id}>
+            <td><Link to={`/reservations/${reservation.id}`} className="no-style bolded">{reservation.name}</Link></td>
+            <td>{reservation.category}</td>
+            <td>{reservation.description}</td>
             <td className="fixed-width">
               <Button
                 type="button"
                 variant="outline-secondary"
-                aria-label="Join car"
-                onClick={() => dispatch(reserveCar(car.id))}
+                aria-label="Join reservation"
+                // onClick={() => dispatch(reserveReservation(reservation.id))}
               >
-                Delete Car
+                Delete Reservation
               </Button>
             </td>
           </tr>
@@ -49,8 +49,8 @@ function CarsListElements({ cars }) {
   );
 }
 
-CarsListElements.propTypes = {
-  cars: PropTypes.arrayOf(
+ReservationsListElements.propTypes = {
+  reservations: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,
       description: PropTypes.string.isRequired,
@@ -62,4 +62,4 @@ CarsListElements.propTypes = {
   ).isRequired,
 };
 
-export default CarsListElements;
+export default ReservationsListElements;

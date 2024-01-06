@@ -36,4 +36,48 @@ const fetchCarByIdAPI = async (carId) => {
   }
 };
 
-export { fetchCarsAPI, fetchCarByIdAPI };
+const createCarAPI = async (carData) => {
+  try {
+    const response = await fetch(FEATURE_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(carData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to create a new car');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(`Failed to create a new car: ${error.message}`);
+  }
+};
+
+const updateCarAPI = async (carData) => {
+  try {
+    const response = await fetch(FEATURE_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(carData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to create a new car');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error(`Failed to create a new car: ${error.message}`);
+  }
+};
+
+export {
+  fetchCarsAPI, fetchCarByIdAPI, createCarAPI, updateCarAPI,
+};

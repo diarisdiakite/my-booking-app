@@ -1,26 +1,26 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-// import { createCarAPI } from '../../fetchCarsAPI';
+// import { createReservationAPI } from '../../fetchReservationsAPI';
 import SideNavbar from '../../../../components/SideNavbar';
-import { addNewCar } from '../../carsSlice';
+import { addNewReservation } from '../../reservationsSlice';
 
-function AddNewCarForm() {
+function AddNewReservationForm() {
   const dispatch = useDispatch();
 
-  const [carData, setCarData] = useState({
-    name: '',
-    image: '',
-    model: '',
-    year: '',
-    description: '',
-    facebook: '',
-    twitter: '',
-    website: '',
+  const [reservationData, setReservationData] = useState({
+    car: '',
+    user: '',
+    finance_fee: '',
+    option_to_purchase_fee: '',
+    total_amount_payable: '',
+    duration: '',
+    date: '',
+    city: '',
   });
 
   const handleChange = (e) => {
     const { id, value } = e.target;
-    setCarData((prevData) => ({
+    setReservationData((prevData) => ({
       ...prevData,
       [id]: value,
     }));
@@ -28,21 +28,21 @@ function AddNewCarForm() {
 
   const handleSubmit = async () => {
     try {
-      await dispatch(addNewCar(carData));
+      await dispatch(addNewReservation(reservationData));
 
       // Clear the form after successfull submission
-      setCarData({
-        name: '',
-        image: '',
-        model: '',
-        year: '',
-        description: '',
-        facebook: '',
-        twitter: '',
-        website: '',
+      setReservationData({
+        car: '',
+        user: '',
+        finance_fee: '',
+        option_to_purchase_fee: '',
+        total_amount_payable: '',
+        duration: '',
+        date: '',
+        city: '',
       });
     } catch (error) {
-      console.error('Failed to add a new car:', error.message);
+      console.error('Failed to add a new reservation:', error.message);
     }
   };
 
@@ -50,17 +50,17 @@ function AddNewCarForm() {
     <div className="flex flex-shrink-0">
       <SideNavbar />
       <div className="w-[80%] border-r-2 border-slate-200 p-4 w-full">
-        <p className="text-lg font-semibold mb-4">Add a New Car</p>
-        <form action="" className="add-car-form">
+        <p className="text-lg font-semibold mb-4">Add a New Reservation</p>
+        <form action="" className="add-reservation-form">
 
           <div className="mb-4">
             <label htmlFor="name" className="block text-sm font-medium text-gray-600">
-              Name
+              User
               <input
                 type="text"
-                placeholder="Add the car name"
-                id="name"
-                value={carData.name}
+                placeholder="Add the reservation name"
+                id="user"
+                value={reservationData.user}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -69,12 +69,12 @@ function AddNewCarForm() {
 
           <div className="mb-4">
             <label htmlFor="image" className="block text-sm font-medium text-gray-600">
-              Image
+              Car
               <input
                 type="text"
-                placeholder="Add the car image"
-                id="image"
-                value={carData.image}
+                placeholder="Add the reservation image"
+                id="car"
+                value={reservationData.car}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -83,12 +83,12 @@ function AddNewCarForm() {
 
           <div className="mb-4">
             <label htmlFor="model" className="block text-sm font-medium text-gray-600">
-              Model
+              Finance_fee
               <input
-                type="text"
-                placeholder="Add the car image"
-                id="model"
-                value={carData.model}
+                type="finance_fee"
+                placeholder="Add the reservation image"
+                id="finance_fee"
+                value={reservationData.finance_fee}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -97,12 +97,12 @@ function AddNewCarForm() {
 
           <div className="mb-4">
             <label htmlFor="year" className="block text-sm font-medium text-gray-600">
-              Year
+              Option to purchase fee
               <input
-                type="number"
-                placeholder="Add the car year"
-                id="year"
-                value={carData.year}
+                type="option_to_purchase_fee"
+                placeholder="Add the reservation year"
+                id="option_to_purchase_fee"
+                value={reservationData.option_to_purchase_fee}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -111,12 +111,12 @@ function AddNewCarForm() {
 
           <div className="mb-4">
             <label htmlFor="description" className="block text-sm font-medium text-gray-600">
-              Description
+              Total_amount_payable
               <input
                 type="text"
-                placeholder="Add the car description"
-                id="description"
-                value={carData.description}
+                placeholder="Add the reservation description"
+                id="total_amount_payable"
+                value={reservationData.total_amount_payable}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -125,12 +125,12 @@ function AddNewCarForm() {
 
           <div className="mb-4">
             <label htmlFor="facebook" className="block text-sm font-medium text-gray-600">
-              Facebook
+              Duration
               <input
-                type="text"
-                placeholder="Add the car facebook"
-                id="facebook"
-                value={carData.facebook}
+                type="number"
+                placeholder="Add the reservation facebook"
+                id="duration"
+                value={reservationData.duration}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -139,12 +139,12 @@ function AddNewCarForm() {
 
           <div className="mb-4">
             <label htmlFor="twitter" className="block text-sm font-medium text-gray-600">
-              Twitter
+              Date
               <input
                 type="text"
-                placeholder="Add the car twitter"
-                id="twitter"
-                value={carData.twitter}
+                placeholder="Add the reservation twitter"
+                id="date"
+                value={reservationData.date}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -153,12 +153,12 @@ function AddNewCarForm() {
 
           <div className="mb-4">
             <label htmlFor="website" className="block text-sm font-medium text-gray-600">
-              Website
+              City
               <input
                 type="text"
-                placeholder="Add the car website"
-                id="website"
-                value={carData.website}
+                placeholder="Add the reservation website"
+                id="city"
+                value={reservationData.city}
                 onChange={handleChange}
                 className="mt-1 p-2 border rounded w-full"
               />
@@ -180,4 +180,4 @@ function AddNewCarForm() {
   );
 }
 
-export default AddNewCarForm;
+export default AddNewReservationForm;

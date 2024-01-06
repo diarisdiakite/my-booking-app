@@ -4,16 +4,16 @@ import { Provider } from 'react-redux';
 import store from './features/store';
 import './index.css';
 import App from './App';
+import { fetchCars, setFetchedCars } from './features/cars/carsSlice';
 import {
-  fetchCars, setFetchedCars,
-} from './features/cars/carsSlice';
-import 'bootstrap/dist/css/bootstrap.css';
-
-// const { carId } = useParams();
+  fetchReservations,
+  setFetchedReservations,
+} from './features/reservations/reservationsSlice';
 
 store.dispatch(fetchCars());
 store.dispatch(setFetchedCars());
-// store.dispatch(fetchCarById());
+store.dispatch(fetchReservations());
+store.dispatch(setFetchedReservations());
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
