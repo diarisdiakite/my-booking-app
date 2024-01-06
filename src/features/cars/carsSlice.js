@@ -121,9 +121,7 @@ const carsSlice = createSlice({
     });
     builder.addCase(updateCar.fulfilled, (state, action) => {
       state.loading = false;
-      state.cars = state.cars.map((car) =>
-        car.id === action.payload.id ? action.payload : car,
-      );
+      state.cars = state.cars.map((car) => (car.id === action.payload.id ? action.payload : car));
       state.error = '';
     });
     builder.addCase(updateCar.rejected, (state, action) => {
@@ -137,11 +135,12 @@ const carsSlice = createSlice({
 });
 
 // export const selectAllCars = (state) => state.cars.cars;
-export const selectAllCars = (state) =>
-  state.cars.loading ? [] : state.cars.cars;
+export const selectAllCars = (state) => (state.cars.loading ? [] : state.cars.cars);
 
-export const selectAllReservedCars = (state) =>
-  state.cars.cars.filter((car) => car.reserved === true);
+export const selectAllReservedCars = function (state) {
+  const cars = state.cars.cars.filter((car) => car.reserved === true);
+  return cars;
+};
 
 export const selectCarsById = (state, carId) => {
   const foundCar = state.cars.cars.find((car) => car.id === carId);
@@ -155,7 +154,6 @@ export const selectCarsByUser = createSelector(
   (cars, userId) => cars.filter((car) => car.userId === userId),
 );
 
-export const { setFetchedCars, reserveCar, cancelCarReservation } =
-  carsSlice.actions;
+export const { setFetchedCars, reserveCar, cancelCarReservation } = carsSlice.actions;
 
 export default carsSlice.reducer;

@@ -1,12 +1,12 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Table } from 'react-bootstrap';
-import { reserveReservation } from '../../reservationsSlice';
+// import { reserveReservation } from '../../reservationsSlice';
 
 function ReservationsListElements({ reservations }) {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   if (!reservations || reservations.length === 0) {
     return (
@@ -37,7 +37,7 @@ function ReservationsListElements({ reservations }) {
                 type="button"
                 variant="outline-secondary"
                 aria-label="Join reservation"
-                onClick={() => dispatch(reserveReservation(reservation.id))}
+                // onClick={() => dispatch(reserveReservation(reservation.id))}
               >
                 Delete Reservation
               </Button>

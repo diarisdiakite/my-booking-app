@@ -55,8 +55,11 @@ const Reservations = () => {
                   <div>
                     <p className="bolded">
                       {' finance_fee: '}
-                      {reservation?.finance_fee},{' option_to_purchase_fee: '}
-                      {reservation?.option_to_purchase_fee},
+                      {reservation?.finance_fee}
+                      ,
+                      {' option_to_purchase_fee: '}
+                      {reservation?.option_to_purchase_fee}
+                      ,
                       {' total_amount_payable: '}
                       {reservation?.total_amount_payable}
                     </p>
