@@ -16,7 +16,7 @@ const CarDetails = () => {
   return (
     <div className="md:flex gap-8 justify-center items-center h-full">
       <div className="rounded shadow overflow-hidden max-w-[50%]">
-        <img src={car?.image} alt="car divumbnail" />
+        <img src={`${process.env.PUBLIC_URL}/${car.image}`} alt={car?.name} />
       </div>
       <div>
         <h2 className="page-title pb-8">{car?.name}</h2>

@@ -1,5 +1,9 @@
-const FEATURE_URL = 'http://localhost:3000/api/v1/cars';
+// const FEATURE_URL = 'http://localhost:3000/api/v1/cars';
 // const FEATURE_URL_1 = 'http://localhost:3000/api/v1/cars/carId';
+
+const baseUrl = process.env.REACT_APP_API_URL;
+const endpoint = '/cars';
+const FEATURE_URL = baseUrl + endpoint;
 
 const fetchCarsAPI = async () => {
   try {
