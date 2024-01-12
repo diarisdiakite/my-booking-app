@@ -33,6 +33,8 @@
 
 The my-booking-app application is a fully functional website that allow the users to book luxurious cars around the world. The project is the Microverse final capstone porject. It is built with React and Ruby on Rails. 
 
+Project backend app link: https://github.com/diarisdiakite/my_booking_app_back_end
+
 ## 🛠 Built With <a name="built-with"></a>
 
 ### Tech Stack <a name="tech-stack"></a>
@@ -136,16 +138,10 @@ GitHub: [@Didy](https://www.github.com/diarisdiakite)
 <br>LinkedIn: [@diarisdiakite](https://www.linkedin.com/in/diariatou-diakite-67ab80165/)
 <br><br>
 
-GitHub: [@Pablo]()
-<br> Twitter: [@Pablo]()
-<br>LinkedIn: [@dPablo]()
+GitHub: [@Pablo](https://github.com/thasipablo)
+<br> Twitter: [@Pablo](https://twitter.com/thasipablo_)
+<br>LinkedIn: [@dPablo](https://www.linkedin.com/in/thasipablo/)
 <br><br>
-
-GitHub: [@Marco]()
-<br> Twitter: [@Marco]()
-<br>LinkedIn: [@Marco]()
-<br><br>
-
 
 [`Back to top`](#readme-top)
 
@@ -173,7 +169,7 @@ Feel free to check the [issues page](https://github.com/diarisdiakite/my-booking
 
 ## ⭐️ Show your support <a name="support"></a>
 
-If you like the [my-booking-app]() project, you can support our work. Please, visit our personal pages to find out more about our work: [diaridiakite personal page](https://diarisdiakite.github.io/my-portfolio/), [Pablo personal page]() and [Marco personal page](https://diarisdiakite.github.io/my-portfolio/).
+If you like the [my-booking-app]() project, you can support our work. Please, visit our personal pages to find out more about our work: [diaridiakite personal page](https://diarisdiakite.github.io/my-portfolio/).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -201,7 +197,7 @@ Yes! Make sure you give us credit of the application.
 ## `Where can we reach out to you ?`
 
 ### `Answer`
-You can reach out to the organisation team by email [diarisdiakite@gmail.com](diarisdiakite@gmail.com), [pablo]()
+You can reach out to the organisation team by email [diarisdiakite@gmail.com](diarisdiakite@gmail.com), [pablo](thasipablo@gmail.com)
 
 [`Back to top`](#readme-top)
 
