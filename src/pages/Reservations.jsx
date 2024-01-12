@@ -38,7 +38,6 @@ const Reservations = () => {
                     type="button"
                     className="no-style"
                     onClick={() => {
-                      console.log('Reservation ID:', reservation.id);
                       handleReservationClick(reservation.id);
                     }}
                   >

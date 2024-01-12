@@ -1,13 +1,11 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Table } from 'react-bootstrap';
 // import { reserveCar } from '../../carsSlice';
 
 function CarsListElements({ cars }) {
-  const dispatch = useDispatch();
-
+  
   if (!cars || cars.length === 0) {
     return (
       <div>
@@ -29,9 +27,9 @@ function CarsListElements({ cars }) {
       <tbody>
         {cars.map((car) => (
           <tr key={car.id}>
-            <td><Link to={`/cars/${car.id}`} className="no-style bolded">{car.name}</Link></td>
-            <td>{car.category}</td>
-            <td>{car.description}</td>
+            <td><Link to={`/cars/${car.id}`} className="no-style bolded">{car?.name}</Link></td>
+            <td>{car?.category}</td>
+            <td>{car?.description}</td>
             <td className="fixed-width">
               <Button
                 type="button"

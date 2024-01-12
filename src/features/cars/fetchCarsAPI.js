@@ -1,17 +1,6 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { getToken } from '../../utils/localStorage';
-
 const baseUrl = process.env.REACT_APP_API_URL;
 const endpoint = '/cars';
 const FEATURE_URL = baseUrl + endpoint;
-
-const token = getToken();
-
-const headers = {
-  'Content-Type': 'application/json',
-  Authorization: `Bearer ${token}`,
-};
 
 const fetchCarByIdAPI = async (carId) => {
   const url = `${FEATURE_URL}/${carId}`;
