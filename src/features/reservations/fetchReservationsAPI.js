@@ -9,26 +9,22 @@ const fetchReservationsAPI = createAsyncThunk(
   'reservations/fetchReservations',
   async (_, { getState }) => {
     const { token } = getState().auth;
-    try {
-      const response = await axios.get(FEATURE_URL, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
 
-      // Ensure only serializable data is returned
-      const serializableData = response.data.map((reservation) => ({
-        id: reservation.id,
-        date: reservation.date,
-        city: reservation.city,
-        car: reservation.car,
-      }));
+    const response = await axios.get(FEATURE_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      return serializableData;
-    } catch (error) {
-      console.error('Error fetching reservations:', error);
-      throw error;
-    }
+    // Ensure only serializable data is returned
+    const serializableData = response.data.map((reservation) => ({
+      id: reservation.id,
+      date: reservation.date,
+      city: reservation.city,
+      car: reservation.car,
+    }));
+
+    return serializableData;
   },
 );
 

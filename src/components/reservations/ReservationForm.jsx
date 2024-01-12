@@ -16,6 +16,8 @@ const ReservationForm = () => {
     city: '',
   });
 
+  const [error, setError] = useState(null);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setReservationData((prevData) => ({
@@ -40,7 +42,7 @@ const ReservationForm = () => {
         city: '',
       });
     } catch (error) {
-      console.error('Failed to add a new reservation:', error.message);
+      setError(`Failed to add a new car: ${error.message}`);
     }
   };
 
@@ -126,6 +128,7 @@ const ReservationForm = () => {
           </button>
         </div>
       </form>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   );
 };

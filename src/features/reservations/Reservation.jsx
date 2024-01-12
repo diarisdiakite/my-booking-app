@@ -16,13 +16,9 @@ function Reservation() {
 
   const reservation = useSelector((state) => selectReservationsById(state, reservationId));
 
-  console.log('Reservation:', reservation);
-
-  /* if (!reservation) {
+  if (!reservation) {
     return <div>Loading...</div>;
   }
- */
-  // const { name, description, model, website } = reservation || {};
 
   return (
     <div className="main-container">

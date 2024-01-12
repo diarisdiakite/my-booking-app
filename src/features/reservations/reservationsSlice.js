@@ -46,7 +46,6 @@ const reservationsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchReservations.fulfilled, (state, action) => {
-      console.log('Fulfilled Action for Reservations:', action);
       state.loading = false;
       state.reservations = action.payload;
       state.error = '';
@@ -55,7 +54,6 @@ const reservationsSlice = createSlice({
       state.loading = false;
       state.reservations = [];
       state.error = action.error ? action.error.message : 'Unknown error occurred';
-      console.error('Fetch Reservations Rejected:', action);
     });
     builder.addCase(fetchReservationById.pending, (state) => {
       state.loading = true;
@@ -75,14 +73,12 @@ const reservationsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(addNewReservation.fulfilled, (state, action) => {
-      console.log('Fulfilled Action:', action);
       state.loading = false;
       // state.reservations = state.reservations.concat(action.payload);
       state.reservations = [...state.reservations, action.payload];
       state.error = '';
     });
     builder.addCase(addNewReservation.rejected, (state, action) => {
-      console.error('Add New Reservation Rejected:', action.error);
       state.loading = false;
       state.error = action.error ? action.error.message : 'Unknown error occured';
     });
@@ -98,7 +94,6 @@ const reservationsSlice = createSlice({
       state.error = '';
     });
     builder.addCase(updateReservation.rejected, (state, action) => {
-      console.error('Update Reservation Rejected:', action.error);
       state.loading = false;
       state.error = action.error ? action.error.message : 'Unknown error occured';
     });

@@ -83,5 +83,5 @@ const updateCarAPI = async (carData) => {
 };
 
 export {
-  fetchCarsAPI, fetchCarByIdAPI, createCarAPI, updateCarAPI,
+  fetchCarByIdAPI, createCarAPI, updateCarAPI,
 };

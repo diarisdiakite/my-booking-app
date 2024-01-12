@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Table } from 'react-bootstrap';
-import { reserveCar } from '../../carsSlice';
+// import { reserveCar } from '../../carsSlice';
 
 function CarsListElements({ cars }) {
   const dispatch = useDispatch();
@@ -37,7 +37,6 @@ function CarsListElements({ cars }) {
                 type="button"
                 variant="outline-secondary"
                 aria-label="Join car"
-                onClick={() => dispatch(reserveCar(car.id))}
               >
                 Delete Car
               </Button>
