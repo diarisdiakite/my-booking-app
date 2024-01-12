@@ -5,7 +5,6 @@ import { Button, Table } from 'react-bootstrap';
 // import { reserveCar } from '../../carsSlice';
 
 function CarsListElements({ cars }) {
-  
   if (!cars || cars.length === 0) {
     return (
       <div>
