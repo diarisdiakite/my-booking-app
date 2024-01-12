@@ -83,7 +83,7 @@ function AddNewReservationForm() {
 
           <div className="mb-4">
             <label htmlFor="model" className="block text-sm font-medium text-gray-600">
-              Finance_fee
+              Location
               <input
                 type="finance_fee"
                 placeholder="Add the reservation image"

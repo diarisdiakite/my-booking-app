@@ -2,12 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  selectAllReservations,
   fetchReservationById,
+  memoizedSelectAllReservations,
 } from '../features/reservations/reservationsSlice';
 
 const Reservations = () => {
-  const reservations = useSelector(selectAllReservations);
+  const reservations = useSelector(memoizedSelectAllReservations);
 
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const Reservations = () => {
               >
                 <img
                   src={`${process.env.PUBLIC_URL}/${reservation.image}`}
-                  alt={reservation.name}
+                  alt={reservation.car}
                 />
               </div>
               <div className="item-reservationd-text-no-line-height">
@@ -52,18 +52,6 @@ const Reservations = () => {
                     </h4>
                   </button>
                   <p>{reservation?.car}</p>
-                  <div>
-                    <p className="bolded">
-                      {' finance_fee: '}
-                      {reservation?.finance_fee}
-                      ,
-                      {' option_to_purchase_fee: '}
-                      {reservation?.option_to_purchase_fee}
-                      ,
-                      {' total_amount_payable: '}
-                      {reservation?.total_amount_payable}
-                    </p>
-                  </div>
                 </div>
               </div>
             </div>

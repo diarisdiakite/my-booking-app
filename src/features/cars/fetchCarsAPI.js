@@ -1,26 +1,16 @@
-// const FEATURE_URL = 'http://localhost:3000/api/v1/cars';
-// const FEATURE_URL_1 = 'http://localhost:3000/api/v1/cars/carId';
+import axios from 'axios';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { getToken } from '../../utils/localStorage';
 
 const baseUrl = process.env.REACT_APP_API_URL;
 const endpoint = '/cars';
 const FEATURE_URL = baseUrl + endpoint;
 
-const fetchCarsAPI = async () => {
-  try {
-    const response = await fetch(FEATURE_URL);
+const token = getToken();
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch cars');
-    }
-
-    const data = await response.json();
-    return data.map((car) => ({
-      ...car,
-      reserved: false,
-    }));
-  } catch (error) {
-    throw new Error(`Failed to fetch the data, ${error}`);
-  }
+const headers = {
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${token}`,
 };
 
 const fetchCarByIdAPI = async (carId) => {
@@ -40,6 +30,16 @@ const fetchCarByIdAPI = async (carId) => {
   }
 };
 
+/* export const fetchCarById = createAsyncThunk(
+  'carDetails/fetchCarDetails',
+  async (carId) => {
+    const response = await axios.get(
+      `${FEATURE_URL}/cars/${carId}`,
+    );
+    return response.data;
+  },
+);
+ */
 const createCarAPI = async (carData) => {
   try {
     const response = await fetch(FEATURE_URL, {

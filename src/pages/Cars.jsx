@@ -2,6 +2,7 @@ import React from 'react';
 import { CarsList } from '../components';
 
 const Cars = () => (
+
   <div className="flex-1 flex flex-col gap-12">
     <div className="text-center">
       <h2 className="page-title">Available cars</h2>

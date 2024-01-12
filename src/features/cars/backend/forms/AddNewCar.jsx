@@ -42,7 +42,7 @@ function AddNewCarForm() {
         website: '',
       });
     } catch (error) {
-      console.error('Failed to add a new car:', error.message);
+      setError(`Failed to add a new car: ${error.message}`);
     }
   };
 

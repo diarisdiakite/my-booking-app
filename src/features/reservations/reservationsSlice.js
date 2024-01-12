@@ -16,12 +16,12 @@ export const fetchReservationById = createAsyncThunk('reservations/fetchReservat
 
 export const addNewReservation = createAsyncThunk('reservations/addNewReservation', async (reservationData) => {
   const response = await createReservationAPI(reservationData);
-  return response;
+  return response.data;
 });
 
 export const updateReservation = createAsyncThunk('reservations/updateReservation', async (reservationData) => {
   const response = await updateReservationAPI(reservationData);
-  return response;
+  return response.data;
 });
 
 const reservationsSlice = createSlice({
@@ -34,7 +34,7 @@ const reservationsSlice = createSlice({
         id: reservation.id,
         date: reservation.date,
         city: reservation.city,
-        car: reservation.card,
+        car: reservation.car,
       }));
       state.reservations = selectedReservations;
       state.loading = false;
@@ -46,6 +46,7 @@ const reservationsSlice = createSlice({
       state.loading = true;
     });
     builder.addCase(fetchReservations.fulfilled, (state, action) => {
+      console.log('Fulfilled Action for Reservations:', action);
       state.loading = false;
       state.reservations = action.payload;
       state.error = '';
@@ -53,7 +54,8 @@ const reservationsSlice = createSlice({
     builder.addCase(fetchReservations.rejected, (state, action) => {
       state.loading = false;
       state.reservations = [];
-      state.error = action.error ? action.error.message : 'Unknown error occured';
+      state.error = action.error ? action.error.message : 'Unknown error occurred';
+      console.error('Fetch Reservations Rejected:', action);
     });
     builder.addCase(fetchReservationById.pending, (state) => {
       state.loading = true;
@@ -103,9 +105,14 @@ const reservationsSlice = createSlice({
   },
 });
 
-// export const selectAllReservations = (state) => state.reservations.reservations;
-export const selectAllReservations = (state) => (
+export const selectAllReservations = (state) => state.reservations.reservations;
+/* export const selectAllReservations = (state) => (
   state.reservations.loading ? [] : state.reservations.reservations
+); */
+
+export const memoizedSelectAllReservations = createSelector(
+  [selectAllReservations],
+  (reservations) => reservations,
 );
 
 export const selectReservationsById = (state, reservationId) => {
