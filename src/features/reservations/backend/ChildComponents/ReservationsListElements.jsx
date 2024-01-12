@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Button, Table } from 'react-bootstrap';
-// import { reserveReservation } from '../../reservationsSlice';
 
 function ReservationsListElements({ reservations }) {
   // const dispatch = useDispatch();

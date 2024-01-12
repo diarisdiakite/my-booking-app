@@ -16,6 +16,8 @@ const ReservationForm = () => {
     city: '',
   });
 
+  const [error, setError] = useState(null);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setReservationData((prevData) => ({
@@ -40,7 +42,7 @@ const ReservationForm = () => {
         city: '',
       });
     } catch (error) {
-      console.error('Failed to add a new reservation:', error.message);
+      setError(`Failed to add a new car: ${error.message}`);
     }
   };
 
@@ -56,7 +58,7 @@ const ReservationForm = () => {
             User
             <input
               type="text"
-              placeholder="Add the reservation name"
+              placeholder="Add the user name"
               id="user"
               value={reservationData.user}
               onChange={handleChange}
@@ -73,77 +75,9 @@ const ReservationForm = () => {
             Car
             <input
               type="text"
-              placeholder="Add the reservation image"
+              placeholder="Add the car references"
               id="car"
               value={reservationData.car}
-              onChange={handleChange}
-              className="mt-1 p-2 border rounded w-full"
-            />
-          </label>
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="model"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Finance_fee
-            <input
-              type="finance_fee"
-              placeholder="Add the reservation image"
-              id="finance_fee"
-              value={reservationData.finance_fee}
-              onChange={handleChange}
-              className="mt-1 p-2 border rounded w-full"
-            />
-          </label>
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="year"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Option to purchase fee
-            <input
-              type="option_to_purchase_fee"
-              placeholder="Add the reservation year"
-              id="option_to_purchase_fee"
-              value={reservationData.option_to_purchase_fee}
-              onChange={handleChange}
-              className="mt-1 p-2 border rounded w-full"
-            />
-          </label>
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="description"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Total_amount_payable
-            <input
-              type="text"
-              placeholder="Add the reservation description"
-              id="total_amount_payable"
-              value={reservationData.total_amount_payable}
-              onChange={handleChange}
-              className="mt-1 p-2 border rounded w-full"
-            />
-          </label>
-        </div>
-
-        <div className="mb-4">
-          <label
-            htmlFor="facebook"
-            className="block text-sm font-medium text-gray-600"
-          >
-            Duration
-            <input
-              type="number"
-              placeholder="Add the reservation facebook"
-              id="duration"
-              value={reservationData.duration}
               onChange={handleChange}
               className="mt-1 p-2 border rounded w-full"
             />
@@ -158,7 +92,7 @@ const ReservationForm = () => {
             Date
             <input
               type="text"
-              placeholder="Add the reservation twitter"
+              placeholder="Add the reservation date"
               id="date"
               value={reservationData.date}
               onChange={handleChange}
@@ -175,7 +109,7 @@ const ReservationForm = () => {
             City
             <input
               type="text"
-              placeholder="Add the reservation website"
+              placeholder="Add the reservation city"
               id="city"
               value={reservationData.city}
               onChange={handleChange}
@@ -194,6 +128,7 @@ const ReservationForm = () => {
           </button>
         </div>
       </form>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   );
 };

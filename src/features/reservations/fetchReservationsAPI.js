@@ -1,61 +1,86 @@
-const FEATURE_URL = 'http://localhost:3000/api/v1/reservations';
-// const FEATURE_URL_1 = 'http://localhost:3000/api/v1/reservations/reservationId';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const fetchReservationsAPI = async () => {
-  try {
-    const response = await fetch(FEATURE_URL);
+const baseUrl = process.env.REACT_APP_API_URL;
+const endpoint = '/reservations/';
+const FEATURE_URL = baseUrl + endpoint;
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch reservations');
-    }
+const fetchReservationsAPI = createAsyncThunk(
+  'reservations/fetchReservations',
+  async (_, { getState }) => {
+    const { token } = getState().auth;
 
-    const data = await response.json();
-    return data.map((reservation) => ({
-      ...reservation,
-      reserved: false,
+    const response = await axios.get(FEATURE_URL, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    // Ensure only serializable data is returned
+    const serializableData = response.data.map((reservation) => ({
+      id: reservation.id,
+      date: reservation.date,
+      city: reservation.city,
+      car: reservation.car,
     }));
-  } catch (error) {
-    throw new Error(`Failed to fetch the data, ${error}`);
-  }
-};
+
+    return serializableData;
+  },
+);
 
 const fetchReservationByIdAPI = async (reservationId) => {
   const url = `${FEATURE_URL}/${reservationId}`;
 
   try {
-    const response = await fetch(url);
+    const token = JSON.parse(localStorage.getItem('token'));
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
 
-    if (!response.ok) {
-      throw new Error('Failed to fetch reservation by ID');
-    }
+    const response = await axios.get(url, { headers });
 
-    const data = await response.json();
-    return data;
+    return response.data;
   } catch (error) {
     throw new Error(`Failed to fetch reservation by ID: ${error.message}`);
   }
 };
 
-const createReservationAPI = async (reservationData) => {
-  try {
-    const response = await fetch(FEATURE_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(reservationData),
-    });
-
-    if (!response.ok) {
-      throw new Error('Failed to create a new reservation');
+const createReservationAPI = createAsyncThunk(
+  'reservation/createReservation',
+  async (reservationData, thunkAPI) => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+    try {
+      const response = await axios.post(FEATURE_URL, reservationData, { headers });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.statusText);
     }
+  },
+);
 
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    throw new Error(`Failed to create a new reservation: ${error.message}`);
-  }
-};
+const cancelReservationAPI = createAsyncThunk(
+  'reservations/cancelReservation',
+  async (reservationId, thunkAPI) => {
+    const token = JSON.parse(localStorage.getItem('token'));
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${token}`,
+    };
+    try {
+      const response = await axios.delete(`${FEATURE_URL}${reservationId}`, {
+        headers,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.response.data);
+    }
+  },
+);
 
 const updateReservationAPI = async (reservationData) => {
   try {
@@ -79,5 +104,9 @@ const updateReservationAPI = async (reservationData) => {
 };
 
 export {
-  fetchReservationsAPI, fetchReservationByIdAPI, createReservationAPI, updateReservationAPI,
+  fetchReservationsAPI,
+  fetchReservationByIdAPI,
+  createReservationAPI,
+  updateReservationAPI,
+  cancelReservationAPI,
 };

@@ -18,6 +18,8 @@ function AddNewReservationForm() {
     city: '',
   });
 
+  const [error, setError] = useState(null);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setReservationData((prevData) => ({
@@ -42,7 +44,7 @@ function AddNewReservationForm() {
         city: '',
       });
     } catch (error) {
-      console.error('Failed to add a new reservation:', error.message);
+      setError(`Failed to add a new car: ${error.message}`);
     }
   };
 
@@ -83,7 +85,7 @@ function AddNewReservationForm() {
 
           <div className="mb-4">
             <label htmlFor="model" className="block text-sm font-medium text-gray-600">
-              Finance_fee
+              Location
               <input
                 type="finance_fee"
                 placeholder="Add the reservation image"
@@ -175,6 +177,7 @@ function AddNewReservationForm() {
             </button>
           </div>
         </form>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
       </div>
     </div>
   );

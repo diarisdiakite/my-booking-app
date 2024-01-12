@@ -1,159 +1,129 @@
-import {
-  createSlice,
-  createSelector,
-  createAsyncThunk,
-} from '@reduxjs/toolkit';
-import {
-  fetchCarsAPI,
-  fetchCarByIdAPI,
-  createCarAPI,
-  updateCarAPI,
-} from './fetchCarsAPI';
+// carsSlice.js
 
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
+import { getToken } from '../../utils/localStorage';
+
+// const BASE_URL = `${process.env.REACT_APP_API_URL}/cars`;
+const BASE_URL = 'http://localhost:3000/api/v1/cars';
 const initialState = {
-  loading: false,
   cars: [],
-  carById: {},
-  error: '',
+  status: 'idle',
+  loading: false,
+  error: null,
 };
 
-export const fetchCars = createAsyncThunk('cars/fetchCars', async () => fetchCarsAPI());
+const token = getToken();
+
+const headers = {
+  'Content-Type': 'application/json',
+  Authorization: `Bearer ${token}`,
+};
+
+export const fetchCars = createAsyncThunk('cars/fetchCars', async (_, thunkAPI) => {
+  try {
+    const response = await fetch(BASE_URL, { headers });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch cars');
+    }
+
+    const data = await response.json();
+    return data.map((car) => ({
+      ...car,
+      reserved: false,
+    }));
+  } catch (error) {
+    return thunkAPI.rejectWithValue(`Failed to fetch the data, ${error}`);
+  }
+});
 
 export const fetchCarById = createAsyncThunk(
   'cars/fetchCarById',
-  async (carId) => fetchCarByIdAPI(carId),
+  async (carId) => {
+    const response = await axios.get(
+      `${BASE_URL}/cars/${carId}`,
+    );
+    return response.data;
+  },
 );
 
-export const addNewCar = createAsyncThunk('cars/addNewCar', async (carData) => {
-  const response = await createCarAPI(carData);
-  return response;
-});
-
-export const updateCar = createAsyncThunk('cars/updateCar', async (carData) => {
-  const response = await updateCarAPI(carData);
-  return response;
+export const addNewCar = createAsyncThunk('cars/AddNewCar', async (add) => {
+  try {
+    const token = getToken();
+    const response = await axios.post(BASE_URL, add, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
 });
 
 const carsSlice = createSlice({
   name: 'cars',
   initialState,
-
-  reducers: {
-    setFetchedCars: (state) => {
-      const selectedCars = state.cars.map((car) => ({
-        id: car.id,
-        name: car.name,
-        image: car.image,
-        desription: car.description,
-        reserved: false,
-      }));
-      state.cars = selectedCars;
-      state.loading = false;
-      state.error = '';
-    },
-    reserveCar: (state, action) => {
-      const carId = action.payload;
-      state.cars = state.cars.map((car) => {
-        if (car.id !== carId) return car;
-        return { ...car, reserved: true };
-      });
-    },
-    cancelCarReservation: (state, action) => {
-      const carId = action.payload;
-      state.cars = state.cars.map((car) => {
-        if (car.id !== carId) return car;
-        return { ...car, reserved: false };
-      });
-    },
-  },
+  reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(fetchCars.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(fetchCars.fulfilled, (state, action) => {
-      state.loading = false;
-      state.cars = action.payload;
-      state.error = '';
-    });
-    builder.addCase(fetchCars.rejected, (state, action) => {
-      state.loading = false;
-      state.cars = [];
-      state.error = action.error
-        ? action.error.message
-        : 'Unknown error occured';
-    });
-    builder.addCase(fetchCarById.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(fetchCarById.fulfilled, (state, action) => {
-      state.loading = false;
-      state.carById = action.payload;
-      state.error = '';
-    });
-    builder.addCase(fetchCarById.rejected, (state, action) => {
-      state.loading = false;
-      state.carById = {};
-      state.error = action.error
-        ? action.error.message
-        : 'Unknown error occured';
-    });
-    // Add a New Car
-    builder.addCase(addNewCar.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(addNewCar.fulfilled, (state, action) => {
-      console.log('Fulfilled Action:', action);
-      state.loading = false;
-      // state.cars = state.cars.concat(action.payload);
-      state.cars = [...state.cars, action.payload];
-      state.error = '';
-    });
-    builder.addCase(addNewCar.rejected, (state, action) => {
-      console.error('Add New Car Rejected:', action.error);
-      state.loading = false;
-      state.error = action.error
-        ? action.error.message
-        : 'Unknown error occured';
-    });
-    // Update Car
-    builder.addCase(updateCar.pending, (state) => {
-      state.loading = true;
-    });
-    builder.addCase(updateCar.fulfilled, (state, action) => {
-      state.loading = false;
-      state.cars = state.cars.map((car) => (car.id === action.payload.id ? action.payload : car));
-      state.error = '';
-    });
-    builder.addCase(updateCar.rejected, (state, action) => {
-      console.error('Update Car Rejected:', action.error);
-      state.loading = false;
-      state.error = action.error
-        ? action.error.message
-        : 'Unknown error occured';
-    });
+    builder
+      .addCase(fetchCars.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCars.fulfilled, (state, action) => {
+        state.loading = false;
+        state.cars = action.payload;
+      })
+      .addCase(fetchCars.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      })
+      .addCase(addNewCar.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addNewCar.fulfilled, (state, action) => {
+        state.loading = false;
+        const {
+          name,
+          description,
+          image,
+          financeFee,
+          optionToPurchaseFee,
+          duration,
+          totalAmountPayable,
+          facebook,
+          twitter,
+          website,
+          userId,
+        } = action.payload;
+
+        const newCar = {
+          name,
+          description,
+          image,
+          financeFee,
+          optionToPurchaseFee,
+          duration,
+          totalAmountPayable,
+          facebook,
+          twitter,
+          website,
+          userId,
+        };
+        state.cars.push(newCar);
+        state.status = 'success';
+        state.error = null;
+      })
+      .addCase(addNewCar.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
+      });
   },
 });
 
-// export const selectAllCars = (state) => state.cars.cars;
-export const selectAllCars = (state) => (state.cars.loading ? [] : state.cars.cars);
-
-export const selectAllReservedCars = function (state) {
-  const cars = state.cars.cars.filter((car) => car.reserved === true);
-  return cars;
-};
-
-export const selectCarsById = (state, carId) => {
-  const foundCar = state.cars.cars.find((car) => car.id === carId);
-  return foundCar || state.cars.carById || null;
-};
-
-/* export const selectCarsById = (state, carId) => state.cars.entities[carId]; */
-
-export const selectCarsByUser = createSelector(
-  [selectAllCars, (_, userId) => userId],
-  (cars, userId) => cars.filter((car) => car.userId === userId),
-);
-
-export const { setFetchedCars, reserveCar, cancelCarReservation } = carsSlice.actions;
+export const selectAllCars = (state) => state.cars.cars;
 
 export default carsSlice.reducer;

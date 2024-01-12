@@ -16,6 +16,8 @@ const NewCarForm = () => {
     website: '',
   });
 
+  const [error, setError] = useState(null);
+
   const handleChange = (e) => {
     const { id, value } = e.target;
     setCarData((prevData) => ({
@@ -39,8 +41,9 @@ const NewCarForm = () => {
         twitter: '',
         website: '',
       });
+      setError(null);
     } catch (error) {
-      console.error('Failed to add a new car:', error.message);
+      setError(`Failed to add a new car: ${error.message}`);
     }
   };
 
@@ -194,6 +197,7 @@ const NewCarForm = () => {
           </button>
         </div>
       </form>
+      {error && <div style={{ color: 'red' }}>{error}</div>}
     </div>
   );
 };

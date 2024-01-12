@@ -201,7 +201,7 @@ Yes! Make sure you give us credit of the application.
 ## `Where can we reach out to you ?`
 
 ### `Answer`
-You can reach out to the organisation team by email [diarisdiakite@gmail.com](diarisdiakite@gmail.com), [pablo]() and [marco]()
+You can reach out to the organisation team by email [diarisdiakite@gmail.com](diarisdiakite@gmail.com), [pablo]()
 
 [`Back to top`](#readme-top)
 
